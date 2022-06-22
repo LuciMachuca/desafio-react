@@ -1,0 +1,61 @@
+.img-gallery{
+    width: 80%;
+    margin: 50px auto 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+    /* grid-template-columns: repeat(5, 20% auto);
+    grid-template-rows: repeat(4, 20% auto); */
+    gap: 30px;
+}
+
+.img-gallery img{
+    width: 100%;
+    cursor: pointer;
+    transition: 1s;
+}
+
+.img-gallery img:hover{
+    transform: scale(1.2);
+}
+
+
+
+.estrellas {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+  }
+  
+  .estrellas p {
+    text-align: center;
+  }
+  
+  .estrellas label {
+    font-size: 20px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  .label {
+    color: grey;
+    width: 30px;
+    height: auto;
+    
+  }
+  
+  .clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+  
+  .label:hover,
+  .label:hover ~ .label {
+    color: orange;
+  }
+  
+  input[type="radio"]:checked ~ .label {
+    color: orange;
+  }
+
