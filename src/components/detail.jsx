@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetail } from '../actions/index';
 //import './Detail.css';
@@ -8,19 +8,22 @@ export default function Detail(props) {
 
 
     const dispatch = useDispatch()
+
     const IMG_PATH = "https://image.tmdb.org/t/p/w1280"
 
-    useEffect(() => {
-        dispatch(getDetail(props.match.params.id));
-    }, [props.match.params.id])
+    let { id } = useParams();
 
-   
+    useEffect(() => {
+        dispatch(getDetail(id));
+    }, [id])
+
+
     const movieId = useSelector((state) => state.detail)
     console.log(movieId);
 
     return (
         <div className="container ancho">
-            
+
             <div class='conteiner m-4'>
                 <div class='row titulo'>
 
@@ -51,13 +54,13 @@ export default function Detail(props) {
                                 <p class="card-text">
                                     <h6 class='subtitulo'>Release Date</h6>
                                     <span>{movieId.release_date}</span></p>
-                                    {/* <span>{movieId.release_date?.slice(0, 10)}</span></p> */}
+                                {/* <span>{movieId.release_date?.slice(0, 10)}</span></p> */}
 
                                 <p class="card-text">
                                     <h6 className='subtitulo'>Popularity</h6>
                                     <span>{movieId.popularity}</span></p>
 
-                                    <p class="card-text">
+                                <p class="card-text">
                                     <h6 className='subtitulo'>Status</h6>
                                     <span>{movieId.status}</span></p>
                             </div>

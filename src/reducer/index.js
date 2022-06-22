@@ -2,7 +2,7 @@ const initialState = {
     homeList: [],
     listMovies: [],
     search: [],
-    detail: [],
+    detail: {},
     filterMovies: []
 }
 

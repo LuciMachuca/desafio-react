@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Home from './components/Home.jsx';
 import Detail from './components/detail.jsx';
 
@@ -7,17 +7,15 @@ import Detail from './components/detail.jsx';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-
+     
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />
         </Routes>
 
         <Routes>
-          <Route path="/detail" element={<Detail />} />
+          <Route path="/detail/:id" element={<Detail />} />
         </Routes>
 
-      </div>
     </BrowserRouter>
   );
 }
