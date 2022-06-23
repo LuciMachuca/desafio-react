@@ -1,38 +1,49 @@
 const initialState = {
     homeList: [],
-    listMovies: [],
-    search: [],
-    detail: {},
-    filterMovies: []
+    allMovies: [],
+    detail: {}
 }
 
 function rootReducer(state = initialState, action) {
 
     switch (action.type) {
-        case 'GET_HOME':
+        case 'POPULARES':
             return {
                 ...state,
-                homeList: action.payload.results,
-                listMovies: action.payload.results
+                homeList: action.payload.results
             };
 
-        case 'SEARCH_MOVIE':
+        case 'BUSQUEDA':
             return {
                 ...state,
-                search: action.payload
+                homeList: action.payload.results
             }
 
-        case "GET_DETAIL":
+        case "DETALLE":
             return {
                 ...state,
                 detail: action.payload
             }
 
-        case 'FILTERED': // el valor del select es lo q le llega a mi acción x payload
-            const vote = action.payload === '4' ? state.listMovies : state.listMovies.filter(mov => mov.vote_average.includes(action.payload))
+            case "TODAS_FILTRO":
             return {
                 ...state,
-                filterMovies: vote
+                allMovies: action.payload.results
+            }
+
+        case 'FILTRADO': 
+
+        let filtrados = []
+        if (action.payload === '1') filtrados = state.allMovies.filter(mov => mov.vote_average <= 2)
+        if (action.payload === '2') filtrados = state.allMovies.filter(mov => mov.vote_average <= 4)
+        if (action.payload === '3') filtrados = state.allMovies.filter(mov => mov.vote_average <= 6)
+        if (action.payload === '4') filtrados = state.allMovies.filter(mov => mov.vote_average <= 8)
+        else if (action.payload === '5') filtrados = state.allMovies.filter(mov => mov.vote_average <= 10)
+        else filtrados = state.homeList
+
+            return {
+                ...state,
+                homeList: filtrados
             }
 
         default:

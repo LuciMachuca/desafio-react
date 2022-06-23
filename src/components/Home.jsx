@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react'; //useEffect llena el estado cuando se monta el componente
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHome, searchMovie, getDetail, filtered } from '../actions/index';
+import { populares, filtrado, todasFiltro } from '../actions/index';
 import NavBar from './navBar.jsx'
 import Detail from './detail.jsx'
 import './home.css';
@@ -22,67 +22,54 @@ export default function Home() {
     let navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getHome())
+        dispatch(populares())
     }, []);
 
-    const listHome = useSelector((state) => state.homeList)
+    const listHome = useSelector((state) => state.homeList) // las más populares
+    const allMovies = useSelector( (state) => state.allMovies) // 100 películas para filtrar x calificación
+    
 
-    const [movies, setMovies] = useState([])
+    /* const [ vista, setVista ] = useState([])  */// lo q voy a ir mostrando
+   
+
+   /*  const [movies, setMovies] = useState([])
+    const [ filter, setFilter ] = useState('')
+console.log(movies) */
 
 
-
-    function handleFilter(e) {
+    function handleFilter(e) { // onSubmit
         e.preventDefault();
-        dispatch(filtered(e.target.value))
+        dispatch(filtrado(e.target.value))
     };
 
-    /* var detailIdBox = document.getElementById("detailIdBox");
-    var pId = document.getElementById("pId");
 
-    function closeDetail() {
-        detailIdBox.style.display = "none"
-    }
-
-    function openDetail(movie) {
-        detailIdBox.style.display = "flex";
-        movie.Id = movie
-    } */
-
-    function referenceId(id){
-        let ref = listHome.find( m => m.id === id )
-        setMovies(ref)
-    }
 
     return (
 
-        <div className='luci'>
+        <div>
 
             <NavBar />
 
             <div>
 
-                <form className='estrellas'>
+                <form className='estrellas' onChange={e => handleFilter(e)}>
                     <p class="clasificacion"><h4 className='mt-5'>Clasificación</h4>
                         <input id="radio1" type="radio" name="estrellas" value="5" />
-                        <label className='label' for="radio1">★</label>
+                        <label className='label' for="radio1" value="5">★</label>
                         <input id="radio2" type="radio" name="estrellas" value="4" />
-                        <label className='label' for="radio2">★</label>
+                        <label className='label' for="radio2" value="4" >★</label>
                         <input id="radio3" type="radio" name="estrellas" value="3" />
-                        <label className='label' for="radio3">★</label>
+                        <label className='label' for="radio3" value="3">★</label>
                         <input id="radio4" type="radio" name="estrellas" value="2" />
-                        <label className='label' for="radio4">★</label>
+                        <label className='label' for="radio4" value="2">★</label>
                         <input id="radio5" type="radio" name="estrellas" value="1" />
-                        <label className='label' for="radio5">★</label>
+                        <label className='label' for="radio5" value="1">★</label>
                     </p>
                 </form>
+
+
             </div>
 
-            {/* <div className='detail-id' id="detailIdBox">
-                <p className='pDetail' id="pId">
-                    <Detail />
-                </p>
-                <span className='spanDetail' onClick={closeDetail()}>x</span>
-            </div> */}
 
             <div className='container img-gallery'>
 
@@ -94,8 +81,8 @@ export default function Home() {
                                 <Link to={"/detail/" + movie.id} >
                                     <img className='ll'
                                         src={IMG_PATH + movie.poster_path}
-                                        alt={movie.title} 
-                                        id={movie.id}/>
+                                        alt={movie.title}
+                                        id={movie.id} />
                                 </Link>
                             </div>
                         )

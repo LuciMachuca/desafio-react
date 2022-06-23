@@ -1,12 +1,8 @@
 import axios from 'axios';
-const { BASE_API,
-    SEARCH_API,
-    DISCOVER_API,
-    API_KEY,
-    IMG_PATH } = process.env;
+
 
 // Home con Películas Populares
-export function getHome() {
+export function populares() {
     return async function (dispatch) {
         const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
             params: {
@@ -16,7 +12,7 @@ export function getHome() {
             }
         });
         return dispatch({
-            type: 'GET_HOME',
+            type: 'POPULARES',
             payload: json.data
         })
     }
@@ -24,7 +20,7 @@ export function getHome() {
 
 // Barra de Búsqueda
 // https://api.themoviedb.org/3/search/movie?api_key=1e40352e4ee54a4b38c2efc103a08b2b&query=%27memory%27
-export function searchMovie(movie) {
+export function busqueda(movie) {
     return async function (dispatch) {
         var json = await axios.get('https://api.themoviedb.org/3/search/movie', {
             params: {
@@ -33,7 +29,7 @@ export function searchMovie(movie) {
             }
         });
         return dispatch({
-            type: 'SEARCH_MOVIE',
+            type: 'BUSQUEDA',
             payload: json.data
         })
 
@@ -41,7 +37,7 @@ export function searchMovie(movie) {
 }
 
 // https://api.themoviedb.org/3/movie/990640?api_key=1e40352e4ee54a4b38c2efc103a08b2b
-export function getDetail(id) {
+export function detalle(id) {
     return async function (dispatch) {
 
         var json = await axios.get('https://api.themoviedb.org/3/movie/' + id, {
@@ -50,16 +46,33 @@ export function getDetail(id) {
             }
         })
         return dispatch({
-            type: "GET_DETAIL",
+            type: "DETALLE",
+            payload: json.data
+        })
+    }
+}
+
+// Home con Películas Populares
+export function todasFiltro() {
+    return async function (dispatch) { 
+        const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+            params: {
+                api_key: '1e40352e4ee54a4b38c2efc103a08b2b',
+                sort_by: 'release_date.asc',
+                page: 5
+            }
+        });
+        return dispatch({
+            type: 'TODAS_FILTRO',
             payload: json.data
         })
     }
 }
 
 // Filtrado por Clasificación
-export function filtered(payload) {
+export function filtrado(payload) {
     return {
-        type: 'FILTERED',
+        type: 'FILTRADO',
         payload
     }
 }
