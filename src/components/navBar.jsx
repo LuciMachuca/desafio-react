@@ -42,8 +42,7 @@ export default function NavBar() {
             <div className="container">
 
                 <div>
-                    <img src={Logo} alt="Logo" style={{ width: "40%" }}/>
-                    
+                    <img src={Logo} alt="Logo" style={{ width: "40%" }} />
                 </div>
 
                 <button type="button"
@@ -58,19 +57,21 @@ export default function NavBar() {
 
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 
-                    <form class="d-flex">
+                    <form class="d-flex mt-3 mt-md-0">
                         <input class="form-control me-2" type="search" placeholder="Search your Movie" aria-label="Search"
                             value={movie} onChange={e => handleInputChange(e)} />
                         <button class="btn btn-outline-success" type="submit"
-                            onClick={e => handleSubmit(e)} style={{ backgroundColor: "#01b4e4", color:"black" }}>
+                            onClick={e => handleSubmit(e)} style={{ backgroundColor: "#01b4e4", color: "black" }}>
                             Go!</button>
                     </form>
 
-                    <a href="#" class="nav-link mx-5" style={{ color: "#01b4e4" }} onClick={e => handleClick(e)}>Refrescar</a>
+                    <div className='text-center m-2 text-md-end m-md-0'>
+                        <a href="#" class="nav-link mx-5" style={{ color: "#01b4e4" }} onClick={e => handleClick(e)}>Refrescar</a>
+                    </div>
 
                 </div>
             </div>
-        </nav>
+        </nav >
 
     )
 

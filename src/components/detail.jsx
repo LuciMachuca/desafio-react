@@ -27,7 +27,7 @@ export default function Detail(props) {
         <div class='conteiner my-4 mx-5'>
             <div class='row titulo'>
 
-                <div class="col-4">
+                <div class="col-12 col-md-6 col-lg-4">
                     <div class="row">
                         <img class="img"
                             src={IMG_PATH + movieId.poster_path}
@@ -37,7 +37,7 @@ export default function Detail(props) {
                 </div>
 
 
-                <div class="col-8 mt-2">
+                <div class="col-12 col-md-6 col-lg-8 mt-2">
                     <div class="row text-center">
 
                         <div class="col-12 m-3 text-center">

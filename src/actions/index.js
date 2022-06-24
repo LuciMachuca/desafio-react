@@ -58,8 +58,7 @@ export function todasFiltro() {
         const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
             params: {
                 api_key: '1e40352e4ee54a4b38c2efc103a08b2b',
-                sort_by: 'release_date.asc',
-                page: 5
+                sort_by: 'release_date.asc'
             }
         });
         return dispatch({
