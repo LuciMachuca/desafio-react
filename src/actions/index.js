@@ -7,7 +7,6 @@ export function populares() {
         const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
             params: {
                 api_key: '1e40352e4ee54a4b38c2efc103a08b2b',
-                language: 'en-US',
                 sort_by: 'popularity.desc'
             }
         });
@@ -57,8 +56,7 @@ export function todasFiltro() {
     return async function (dispatch) { 
         const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
             params: {
-                api_key: '1e40352e4ee54a4b38c2efc103a08b2b',
-                sort_by: 'release_date.asc'
+                api_key: '1e40352e4ee54a4b38c2efc103a08b2b'
             }
         });
         return dispatch({

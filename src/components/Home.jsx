@@ -9,6 +9,7 @@ import NavBar from './navBar.jsx'
 import Icon from '../iconW.svg';
 import Detail from './detail.jsx'
 import './home.css';
+import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 
 
 export default function Home() {
@@ -31,20 +32,17 @@ export default function Home() {
     }, []);
 
     const listHome = useSelector((state) => state.homeList) // las más populares
-    const allMovies = useSelector((state) => state.allMovies) // 100 películas para filtrar x calificación
-    console.log(allMovies)
+    const allMovies = useSelector((state) => state.allMovies) 
+    //console.log(allMovies) 
 
-    const [filter, setFilter] = useState(0)  // e.target.value
+    const [ input, setInput ] = useState('')
 
-    function handleChange(e) { // onSubmit
+    const handleFilter = (e) => {
         console.log(e.target.value)
-        setFilter(e.target.value)
-    };
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        dispatch(filtrado(filter))
+        dispatch(filtrado(e.target.value))
+        setInput('')
     }
+
 
     return (
 
@@ -52,17 +50,17 @@ export default function Home() {
             <NavBar />
             <div>
 
-                <form className='estrellas' onSubmit={e => handleSubmit(e)}>
+                <form className='estrellas'>
                     <p class="clasificacion"><h4 className='mt-5'>Filter by Classification</h4>
-                        <input id="radio1" type="radio" name="5" value="5" onChange={e => handleChange(e)} />
+                        <input id="radio1" type="radio" name="5" value="5" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio1" value="5">★</label>
-                        <input id="radio2" type="radio" name="4" value="4" onChange={e => handleChange(e)} />
+                        <input id="radio2" type="radio" name="4" value="4" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio2" value="4" >★</label>
-                        <input id="radio3" type="radio" name="3" value="3" onChange={e => handleChange(e)} />
+                        <input id="radio3" type="radio" name="3" value="3" onChange={(e) => handleFilter(e)}  />
                         <label className='label' for="radio3" value="3">★</label>
-                        <input id="radio4" type="radio" name="2" value="2" onChange={e => handleChange(e)} />
+                        <input id="radio4" type="radio" name="2" value="2" onChange={(e) => handleFilter(e)}  />
                         <label className='label' for="radio4" value="2">★</label>
-                        <input id="radio5" type="radio" name="1" value="1" onChange={e => handleChange(e)} />
+                        <input id="radio5" type="radio" name="1" value="1" onChange={(e) => handleFilter(e)}  />
                         <label className='label' for="radio5" value="1">★</label>
                     </p>
                 </form>

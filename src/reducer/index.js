@@ -11,7 +11,7 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 homeList: action.payload.results,
-                allMovies: action.payload.results
+                //allMovies: action.payload.results
             };
 
         case 'BUSQUEDA':
