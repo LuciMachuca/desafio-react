@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { detalle } from '../actions/index';
-//import './Detail.css';
 
 export default function Detail(props) {
 
@@ -19,10 +18,8 @@ export default function Detail(props) {
 
 
     const movieId = useSelector((state) => state.detail)
-    console.log(movieId);
 
     return (
-
 
         <div class='conteiner my-4 mx-5'>
             <div class='row titulo'>
@@ -41,7 +38,7 @@ export default function Detail(props) {
                     <div class="row text-center">
 
                         <div class="col-12 m-3 text-center">
-                            <h5 class="name display-6" style={{ backgroundColor: "#01b4e4", color:"#0d253f" }}>{movieId.title}</h5>
+                            <h5 class="name display-6" style={{ backgroundColor: "#01b4e4", color: "#0d253f" }}>{movieId.title}</h5>
                         </div>
 
                         <div class="col-12 mt-3 text-center pt-auto desc">
@@ -52,15 +49,15 @@ export default function Detail(props) {
                             <div class="row text-center">
 
                                 <p class="card-text">
-                                    <h6 class='subtitulo'style={{ backgroundColor: "#90cea1", color:"#0d253f" }}>Release Date</h6>
+                                    <h6 class='subtitulo' style={{ backgroundColor: "#90cea1", color: "#0d253f" }}>Release Date</h6>
                                     <span>{movieId.release_date}</span></p>
 
                                 <p class="card-text">
-                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color:"#0d253f" }}>Popularity</h6>
+                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color: "#0d253f" }}>Popularity</h6>
                                     <span>{movieId.popularity}</span></p>
 
                                 <p class="card-text">
-                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color:"#0d253f" }}>Status</h6>
+                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color: "#0d253f" }}>Status</h6>
                                     <span>{movieId.status}</span></p>
                             </div>
                         </div>
@@ -69,7 +66,7 @@ export default function Detail(props) {
                             <div class="row text-center">
 
                                 <ul class="list-inline">
-                                    <h6 class='subtitulo' style={{ backgroundColor: "#90cea1", color:"#0d253f" }}>Genres</h6>
+                                    <h6 class='subtitulo' style={{ backgroundColor: "#90cea1", color: "#0d253f" }}>Genres</h6>
                                     {
                                         movieId.genres &&
                                         movieId.genres?.map(gen => <li className='lista' key={gen.id} ><span className='viñ'>{gen.name}</span></li>)
@@ -77,7 +74,7 @@ export default function Detail(props) {
                                 </ul>
 
                                 <p class="card-text">
-                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color:"#0d253f" }}>Vote Average</h6>
+                                    <h6 className='subtitulo' style={{ backgroundColor: "#90cea1", color: "#0d253f" }}>Vote Average</h6>
                                     <span>{movieId.vote_average}</span></p>
 
                             </div>

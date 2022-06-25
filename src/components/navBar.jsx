@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { populares, busqueda } from '../actions/index';
-import { Link } from 'react-router-dom';
 import Logo from '../../src/logoTMDB.svg';
-//import './navBar.css';
+
 
 export default function NavBar() {
 
@@ -24,7 +23,7 @@ export default function NavBar() {
         setMovie('');
     }
 
-    // ------- PARA VOLVER A CARGAR TODOS LOS JUEGOS
+    // ------- Refrescar -> Volver a cargar las Populares
 
     useEffect(() => {
         dispatch(populares())

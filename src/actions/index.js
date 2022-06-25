@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-// Home con Películas Populares
+// 20 Películas Populares
 export function populares() {
     return async function (dispatch) {
         const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
@@ -18,7 +18,6 @@ export function populares() {
 }
 
 // Barra de Búsqueda
-// https://api.themoviedb.org/3/search/movie?api_key=1e40352e4ee54a4b38c2efc103a08b2b&query=%27memory%27
 export function busqueda(movie) {
     return async function (dispatch) {
         var json = await axios.get('https://api.themoviedb.org/3/search/movie', {
@@ -35,7 +34,6 @@ export function busqueda(movie) {
     }
 }
 
-// https://api.themoviedb.org/3/movie/990640?api_key=1e40352e4ee54a4b38c2efc103a08b2b
 export function detalle(id) {
     return async function (dispatch) {
 
@@ -51,18 +49,21 @@ export function detalle(id) {
     }
 }
 
-// Home con Películas Populares
-export function todasFiltro() {
-    return async function (dispatch) { 
-        const json = await axios.get(`https://api.themoviedb.org/3/discover/movie`, {
+// Array de películas random para el filtrado
+export function fetchPelis(page) {
+    return async function (dispatch) {
+        var json = await axios.get('https://api.themoviedb.org/3/discover/movie', {
             params: {
-                api_key: '1e40352e4ee54a4b38c2efc103a08b2b'
+                api_key: '1e40352e4ee54a4b38c2efc103a08b2b',
+                sort_by: 'popularity.desc',
+                page: page
             }
         });
         return dispatch({
-            type: 'TODAS_FILTRO',
+            type: 'FETCH_PELIS',
             payload: json.data
         })
+
     }
 }
 
@@ -74,6 +75,3 @@ export function filtrado(payload) {
     }
 }
 
-
-
-// var json = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&sort_by=popularity.desc`, {});

@@ -1,46 +1,39 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react'; 
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { populares, filtrado, todasFiltro } from '../actions/index';
+import { populares, filtrado, fetchPelis } from '../actions/index';
 import NavBar from './navBar.jsx'
 import Icon from '../iconW.svg';
-import Detail from './detail.jsx'
 import './home.css';
-import { hasSelectionSupport } from '@testing-library/user-event/dist/utils';
 
 
 export default function Home() {
 
-    const API_KEY = "1e40352e4ee54a4b38c2efc103a08b2b"
-    const BASE_API = "https://api.themoviedb.org/3/"
-    const SEARCH_API = BASE_API + "search/movie"
-    const DISCOVER_API = BASE_API + "discover/movie"
     const IMG_PATH = "https://image.tmdb.org/t/p/w1280"
 
     const dispatch = useDispatch();
-    let navigate = useNavigate();
 
     useEffect(() => {
         dispatch(populares())
     }, []);
 
     useEffect(() => {
-        dispatch(todasFiltro())
-    }, []);
+        let pages = [9, 21, 30, 42, 51, 64, 72, 81, 100];
+        pages.map(page => dispatch(fetchPelis(page)))
+    }, [dispatch]);
 
     const listHome = useSelector((state) => state.homeList) // las más populares
-    const allMovies = useSelector((state) => state.allMovies) 
-    //console.log(allMovies) 
 
-    const [ input, setInput ] = useState('')
+    // Para quitar el encabezado de "Most Popular" cuando se ejecute el filtro
+    const [vista, setVista] = useState('visible')
 
     const handleFilter = (e) => {
-        console.log(e.target.value)
-        dispatch(filtrado(e.target.value))
-        setInput('')
+        if (e) {
+            e.preventDefault();
+            console.log(e.target.value)
+            dispatch(filtrado(e.target.value))
+            setVista('invisible')
+        }
     }
 
 
@@ -56,19 +49,19 @@ export default function Home() {
                         <label className='label' for="radio1" value="5">★</label>
                         <input id="radio2" type="radio" name="4" value="4" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio2" value="4" >★</label>
-                        <input id="radio3" type="radio" name="3" value="3" onChange={(e) => handleFilter(e)}  />
+                        <input id="radio3" type="radio" name="3" value="3" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio3" value="3">★</label>
-                        <input id="radio4" type="radio" name="2" value="2" onChange={(e) => handleFilter(e)}  />
+                        <input id="radio4" type="radio" name="2" value="2" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio4" value="2">★</label>
-                        <input id="radio5" type="radio" name="1" value="1" onChange={(e) => handleFilter(e)}  />
+                        <input id="radio5" type="radio" name="1" value="1" onChange={(e) => handleFilter(e)} />
                         <label className='label' for="radio5" value="1">★</label>
                     </p>
                 </form>
-            </div><br/><br/><br/>
+            </div><br /><br /><br />
 
             <div className='card container'>
-                <div class="card-header mostPop" style={{ backgroundColor: "#90cea1", color: "white" }}>
-                    Most Popular <img src={Icon} alt="Icon" style={{ width: "3.2%" }} />
+                <div className={vista} style={{ backgroundColor: "#90cea1", color: "white" }}>
+                    <h4 className='card-header mostPop'>Most Popular <img src={Icon} alt="Icon" style={{ width: "3.2%" }} /></h4>
                 </div>
 
 
